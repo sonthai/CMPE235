@@ -26,8 +26,21 @@ exports.login = function(req, res) {
 
 };
 
-exports.register =  function(req, res) {	
-	res.status(200).send({message: 'Registration'});
+exports.register =  function(req, res) {
+	var user = new User(req.body);
+	var message = null;
+
+	user.save(function(err) {
+		if (err) {
+			res.status(400).send({message: 'Failed to register'});
+		} else {
+			res.json(user);
+
+		}
+	
+	});
+	//res.status(200).send({message: 'Registration'});
+	console.log('req user ' + JSON.stringify(req.user));
 	console.log('Body: ' + JSON.stringify(req.body));
-}
+};
 
