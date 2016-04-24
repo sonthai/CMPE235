@@ -7,25 +7,22 @@ var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
 
 /**
- * Trees Schema
+ * Activity Schema
  */
-var TreesSchema = new Schema({
-	// Trees model fields   
+var ActivitySchema = new Schema({
+	// Activity model fields   
 	tree_id: {
 		type: String
 	},
-	sensor_id: {
+	activity: {
 		type: String
 	},
-	tree_location: {
+	userName: {
 		type: String
 	},
-	tree_status: {
-		type: String
-	},
-	deployment_date: {
+	timestamp: {
 		type: Date
 	}
 });
 
-mongoose.model('Tree', TreesSchema);
+mongoose.model('Activity', ActivitySchema);

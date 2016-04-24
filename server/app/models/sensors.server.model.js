@@ -11,7 +11,22 @@ var mongoose = require('mongoose'),
  */
 var SensorsSchema = new Schema({
 	// Sensors model fields   
-	// ...
+	sensor_id: {
+		type: String
+	},
+	sensor_location: {
+		type: String
+	},
+	sensor_status: {
+		type: String
+	},
+	sensor_type: {
+		type: String
+	},
+	deployment_date: {
+		type: Date
+	}
+
 });
 
-mongoose.model('Sensors', SensorsSchema);
+mongoose.model('Sensor', SensorsSchema);
