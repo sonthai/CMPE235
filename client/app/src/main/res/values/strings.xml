@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">SmartStreetUserApp</string>
+    <string name="action_logout">Logout</string>
+    <string name="title_activity_user_register">UserRegister</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_sample">sample</string>
+    <string name="title_activity_admin_home">AdminHome</string>
+    <string name="title_activity_barcode_scanner">BarcodeScanner</string>
+</resources>
