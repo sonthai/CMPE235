@@ -17,11 +17,14 @@
         android:layout_height="wrap_content"
         android:id="@+id/mapButton"
         android:onClick="scanCode"
-        android:src="@drawable/about"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="53dp"
         android:layout_gravity="center"/>
+        <!--
+        android:src="@drawable/about"
+        -->
+
 
 
     <TextView

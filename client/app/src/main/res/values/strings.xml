@@ -6,4 +6,5 @@
     <string name="title_activity_sample">sample</string>
     <string name="title_activity_admin_home">AdminHome</string>
     <string name="title_activity_barcode_scanner">BarcodeScanner</string>
+    <string name="title_activity_nearby">NearBy</string>
 </resources>
