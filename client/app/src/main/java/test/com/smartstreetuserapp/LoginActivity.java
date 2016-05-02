@@ -37,11 +37,14 @@ public class LoginActivity extends AppCompatActivity {
     EditText passwordText;
     Button signBttn;
     private final String loginUrl = "http://ec2-52-27-135-64.us-west-2.compute.amazonaws.com:3000/users/login";
+    SessionHandler session;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+        session = new SessionHandler(getApplicationContext());
 
         usernameText = (EditText) findViewById(R.id.idText);
         passwordText = (EditText) findViewById(R.id.pwdText);
@@ -56,12 +59,12 @@ public class LoginActivity extends AppCompatActivity {
 
     public void signinUser(View v) {
 
-        String userName = usernameText.getText().toString();
+        final String userName = usernameText.getText().toString();
         String password = passwordText.getText().toString();
         if (password.equals("") || userName.equals("")) {
             Toast.makeText(getApplicationContext(), "Field Required", Toast.LENGTH_LONG).show(); // displaying message
             return;
-        } else {
+        } else  {
 
             JSONObject json = new JSONObject();
             try {
@@ -153,20 +156,22 @@ public class LoginActivity extends AppCompatActivity {
                         if (errorCode == 0) {
 
                             if (mode.equals(user)) {
-                                Toast.makeText(getApplicationContext(), "Welcome User", Toast.LENGTH_LONG).show();
+                                session.LoginManager(userName);
+                                Toast.makeText(getApplicationContext(), "Welcome "+userName, Toast.LENGTH_LONG).show();
                                 Intent i = new Intent(getApplicationContext(), MainActivity.class);
                                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(i);
                                 finish();
                             } else {
-                                Toast.makeText(getApplicationContext(), "Welcome User", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "Welcome Admin", Toast.LENGTH_LONG).show();
                                 Intent i = new Intent(getApplicationContext(), AdminHome.class);
                                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(i);
                                 finish();
 
                             }
-                        } else {
+                        }
+                        else if(errorCode==1){
                             Toast.makeText(getApplicationContext(), "Invalid Username/ password, please try again", Toast.LENGTH_LONG).show();
                         }
 

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:weightSum="1">
+        <Button android:text="@string/btnIntend"
+            android:id="@+id/capturePhoto"
+            android:onClick="capturePhoto"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_weight="0.44"
+             />
+        <IButton android:text="@string/btnIntendS"
+            android:id="@+id/captureVideo"
+            android:onClick="captureVideo"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_weight="0.42"
+             />
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:id="@+id/shareMailButton"
+            android:visibility="visible"
+            android:background="#cfcfcf"
+            android:layout_weight="0.20" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="228dp"
+        android:weightSum="1"
+        android:layout_weight="0.43">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="286dp"
+            android:id="@+id/photoView"
+            android:clickable="true"
+            android:longClickable="true"
+            android:layout_weight="0.21"
+            android:maxHeight="100dp"
+            android:maxWidth="100dp"
+            android:minHeight="100dp" />
+
+    </LinearLayout>
+
+    <com.facebook.share.widget.ShareButton
+        android:id="@+id/share_btn"
+        android:layout_width="137dp"
+        android:visibility="invisible"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/share"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.07" />
+
+</LinearLayout>

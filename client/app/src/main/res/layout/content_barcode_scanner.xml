@@ -21,10 +21,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="53dp"
         android:layout_gravity="center"/>
-        <!--
-        android:src="@drawable/about"
-        -->
-
 
 
     <TextView
