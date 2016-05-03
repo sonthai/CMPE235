@@ -50,13 +50,14 @@ public class CommentFragment extends Fragment {
     private static final String TAG = "Comment";
     RatingBar ratingbar;
     EditText commentText;
-    ListView commentLisView;
+    ListView commentListView;
     Button commentBttn;
     Context context;
     ArrayList<Comment> comments = new ArrayList<>();
     private final String postcommentUrl = "http://ec2-52-27-135-64.us-west-2.compute.amazonaws.com:3000/comments/add";
     private final String getcommentURL = "http://ec2-52-27-135-64.us-west-2.compute.amazonaws.com:3000/comments/list";
 
+    
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -70,22 +71,25 @@ public class CommentFragment extends Fragment {
         SimpleDateFormat df =  new SimpleDateFormat("yyyy-MM-dd");
         try {
             comments.add(new Comment("Great App", 4.2f, "sdthai", df.parse("2016-03-21")));
+            comments.add(new Comment("Great App", 4.2f, "sdthai", df.parse("2016-03-21")));
+            comments.add(new Comment("Great App", 4.2f, "sdthai", df.parse("2016-03-21")));
+            comments.add(new Comment("Great App", 4.2f, "sdthai", df.parse("2016-03-21")));
+            comments.add(new Comment("Great App", 4.2f, "sdthai", df.parse("2016-03-21")));
         } catch (ParseException pEx) {}
         View v = inflater.inflate(R.layout.comment_fragment, container, false);
         ratingbar = (RatingBar) v.findViewById(R.id.ratingBar);
         commentText = (EditText) v.findViewById(R.id.commentBox);
-        commentText.setText("Hello, World");
-        commentLisView = (ListView) v.findViewById(R.id.commentListView);
-        
+        commentListView = (ListView) v.findViewById(R.id.commentlistView);
+
         commentBttn = (Button) v.findViewById(R.id.commentButton);
+        context = getActivity().getApplicationContext() ;
+        commentListView.setAdapter(new CommentAdapter(context,  comments));
 
         //final SessionHandler session = new SessionHandler();
 
         commentBttn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context = getActivity();
-                commentLisView.setAdapter(new CommentAdapter(context, comments));
                 /*if(commentText.equals("")||ratingbar.equals("")){
                     Toast.makeText(getActivity().getApplicationContext(), "Field Required", Toast.LENGTH_LONG).show();
                 } */

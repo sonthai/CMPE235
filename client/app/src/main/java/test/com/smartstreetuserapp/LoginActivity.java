@@ -3,6 +3,7 @@ package test.com.smartstreetuserapp;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -56,6 +57,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     public void signinUser(View v) {
 
@@ -136,6 +139,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             reader.close();
                         } catch (Exception ex) {
+                            System.out.println(ex.getStackTrace());
                         }
                     }
 

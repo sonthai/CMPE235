@@ -38,5 +38,8 @@ public class Comment {
     public void setRating(float rating) {
         this.rating = rating;
     }
+
+    public Date getCommentDate() {return date;}
+
 }
 

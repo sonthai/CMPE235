@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -18,9 +19,11 @@ import sjsu.cmpe235.smartstreet.user.model.Comment;
 public class CommentAdapter extends BaseAdapter {
     private ArrayList<Comment> comments;
     private LayoutInflater mInflater;
+    //private ListView lv;
 
-    public CommentAdapter(Context context, ArrayList<Comment> comments) {
+    public CommentAdapter(Context context,  ArrayList<Comment> comments) {
         this.comments = comments;
+        //this.lv = lv;
         this.mInflater = LayoutInflater.from(context);
     }
     @Override
@@ -44,19 +47,20 @@ public class CommentAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.row, null);
             holder = new ViewHolder();
-            holder.userName = (TextView)convertView.findViewById(R.id.userNameView);
-            holder.comment = (TextView)convertView.findViewById(R.id.commentView);
-            holder.rating = (RatingBar)convertView.findViewById(R.id.ratingBar2);
-            holder.date = (TextView) convertView.findViewById(R.id.timeView);
+            holder.userName = (TextView)convertView.findViewById(R.id.user_textview);
+            holder.comment = (TextView)convertView.findViewById(R.id.review);
+            holder.rating = (RatingBar)convertView.findViewById(R.id.rating);
+            holder.date = (TextView) convertView.findViewById(R.id.date_textview);
+            convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        //holder.userName.setText(comments.get(position).getUserName());
+        holder.userName.setText(comments.get(position).getUserName());
         holder.comment.setText(comments.get(position).getComment());
         holder.rating.setRating(comments.get(position).getRating());
-        //SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
-        //holder.date.setText(format.format(comments.get(position).getComment()));
+        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+        holder.date.setText(format.format(comments.get(position).getCommentDate()));
 
         return convertView;
     }

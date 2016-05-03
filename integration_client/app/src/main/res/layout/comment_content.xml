@@ -9,8 +9,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="sjsu.cmpe235.smartstreet.user.CommentFragment"
-    tools:showIn="@layout/comment_fragment">
+    tools:context="test.com.smartstreetuserapp.Comment"
+    tools:showIn="@layout/activity_comment">
 
     <EditText
         android:layout_width="wrap_content"
@@ -19,7 +19,6 @@
         android:ems="10"
         android:id="@+id/commentBox"
         android:hint="Comment Here"
-        android:layout_marginTop="40sp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
@@ -46,7 +45,7 @@
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="350dp"
-        android:id="@+id/commentListView"
+        android:id="@+id/commentlistView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/commentButton"
