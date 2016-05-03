@@ -1,0 +1,133 @@
+package sjsu.cmpe235.smartstreet.user;
+
+import android.graphics.Color;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
+
+import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
+import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
+
+public class MainActivity extends AppCompatActivity {
+    Toolbar toolbar;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        //noinspection ConstantConditions
+        getSupportActionBar().setTitle("SmartStreet");
+
+//        int[] colors = {R.color.bottomtab_0, R.color.bottomtab_1, R.color.bottomtab_2};
+        final String[] colors = {"#96CC7A", "#EA705D", "#66BBCC","#ff8080","#8080ff","#df80ff"};
+
+      /*  final SquareFragment fragment = new SquareFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("color", Color.parseColor(colors[0]));
+        fragment.setArguments(bundle);
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.frame, fragment, "square")
+                .commit(); */
+
+        AHBottomNavigation bottomNavigation = (AHBottomNavigation) findViewById(R.id.bottom_navigation);
+
+        AHBottomNavigationItem item1 = new AHBottomNavigationItem("Interact", R.drawable.interact, Color.parseColor(colors[0]));
+        AHBottomNavigationItem item2 = new AHBottomNavigationItem("About", R.drawable.about, Color.parseColor(colors[1]));
+        AHBottomNavigationItem item3 = new AHBottomNavigationItem("Camera", R.drawable.camera, Color.parseColor(colors[2]));
+        AHBottomNavigationItem item4 = new AHBottomNavigationItem("Nearby", R.drawable.maps, Color.parseColor(colors[3]));
+        AHBottomNavigationItem item5 = new AHBottomNavigationItem("Share", R.drawable.share, Color.parseColor(colors[4]));
+        AHBottomNavigationItem item6 = new AHBottomNavigationItem("Comment", R.drawable.comment, Color.parseColor(colors[5]));
+
+        bottomNavigation.addItem(item1);
+        bottomNavigation.addItem(item2);
+        bottomNavigation.addItem(item3);
+        bottomNavigation.addItem(item4);
+        bottomNavigation.addItem(item5);
+        bottomNavigation.addItem(item6);
+
+        bottomNavigation.setDefaultBackgroundColor(Color.parseColor("#FEFEFE"));
+
+        bottomNavigation.setAccentColor(Color.parseColor("#F63D2B"));
+        bottomNavigation.setInactiveColor(Color.parseColor("#747474"));
+
+        //  Enables Reveal effect
+        bottomNavigation.setColored(true);
+
+        bottomNavigation.setCurrentItem(0);
+
+        bottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(int position, boolean wasSelected) {
+                // Do something cool here...
+
+              // fragment.updateColor(Color.parseColor(colors[position]));
+           //     Toast.makeText(getApplicationContext(), colors[position], Toast.LENGTH_SHORT).show();
+
+                final InteractFragment interactFragment = new InteractFragment();
+                final AboutFragment aboutFragment = new AboutFragment();
+                final CameraFragment cameraFragment = new CameraFragment();
+                final NearbyFragment nearbyFragment = new NearbyFragment();
+                final ShareFragment shareFragment = new ShareFragment();
+                final CommentFragment commentFragment = new CommentFragment();
+
+                switch(colors[position]){
+                    case "#96CC7A":
+                        Toast.makeText(getApplicationContext(), "interact", Toast.LENGTH_SHORT).show();
+
+
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .add(R.id.frame, interactFragment)
+                                .commit();
+                        break;
+                    case "#EA705D":
+
+                        Toast.makeText(getApplicationContext(),"about", Toast.LENGTH_SHORT).show();
+
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.frame, aboutFragment)
+                                .addToBackStack(null)
+                                //.remove(aboutFragment)
+                                .commit();
+                        break;
+                    case "#66BBCC":
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .remove(cameraFragment)
+                                .commit();
+                        break;
+                    case "#ff8080":
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .remove(nearbyFragment)
+                                .commit();
+                        break;
+                    case "#8080ff":
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .remove(shareFragment)
+                                .commit();
+                        break;
+                    case "#df80ff":
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.frame, commentFragment)
+                                .addToBackStack(null)
+                                .commit();
+                }
+        }
+        });
+
+    }
+
+
+
+}

@@ -1,6 +1,5 @@
 package test.com.smartstreetuserapp.com.smartstreet.models;
 
-import lab1.cmpe235.sjsu.smartstreet.model.Location;
 
 /**
  * Created by sonthai on 2/28/16.

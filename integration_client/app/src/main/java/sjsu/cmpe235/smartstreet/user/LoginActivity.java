@@ -1,22 +1,15 @@
-package test.com.smartstreetuserapp;
+package sjsu.cmpe235.smartstreet.user;
 
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.SystemClock;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -32,20 +25,17 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class LoginActivity extends AppCompatActivity {
-
     private static final String TAG = "Log";
+    private final String loginUrl = "http://ec2-52-27-135-64.us-west-2.compute.amazonaws.com:3000/users/login";
+
     EditText usernameText;
     EditText passwordText;
     Button signBttn;
-    private final String loginUrl = "http://ec2-52-27-135-64.us-west-2.compute.amazonaws.com:3000/users/login";
-    SessionHandler session;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
-        session = new SessionHandler(getApplicationContext());
+        setContentView(R.layout.activity_login);
 
         usernameText = (EditText) findViewById(R.id.idText);
         passwordText = (EditText) findViewById(R.id.pwdText);
@@ -58,16 +48,13 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-
-
     public void signinUser(View v) {
-
-        final String userName = usernameText.getText().toString();
+        String userName = usernameText.getText().toString();
         String password = passwordText.getText().toString();
         if (password.equals("") || userName.equals("")) {
             Toast.makeText(getApplicationContext(), "Field Required", Toast.LENGTH_LONG).show(); // displaying message
             return;
-        } else  {
+        } else {
 
             JSONObject json = new JSONObject();
             try {
@@ -92,7 +79,9 @@ public class LoginActivity extends AppCompatActivity {
                     String JsonResponse = null;
                     String JsonDATA = params[0];
                     URL url;
+
                     try {
+
                         url = new URL(loginUrl);
                         conn = (HttpURLConnection) url.openConnection();
 
@@ -139,14 +128,14 @@ public class LoginActivity extends AppCompatActivity {
 
                             reader.close();
                         } catch (Exception ex) {
-                            System.out.println(ex.getStackTrace());
+                            ex.printStackTrace();
                         }
                     }
 
 
                     return JsonResponse;
-                }
 
+                }
 
                 @Override
                 protected void onPostExecute(String response) {
@@ -160,22 +149,20 @@ public class LoginActivity extends AppCompatActivity {
                         if (errorCode == 0) {
 
                             if (mode.equals(user)) {
-                                session.LoginManager(userName);
-                                Toast.makeText(getApplicationContext(), "Welcome "+userName, Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "Welcome User", Toast.LENGTH_LONG).show();
                                 Intent i = new Intent(getApplicationContext(), MainActivity.class);
                                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(i);
                                 finish();
                             } else {
-                                Toast.makeText(getApplicationContext(), "Welcome Admin", Toast.LENGTH_LONG).show();
-                                Intent i = new Intent(getApplicationContext(), AdminHome.class);
-                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                startActivity(i);
-                                finish();
+                                Toast.makeText(getApplicationContext(), "Welcome User", Toast.LENGTH_LONG).show();
+                                //Intent i = new Intent(getApplicationContext(), AdminHome.class);
+                                //i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                //startActivity(i);
+                                //finish();
 
                             }
-                        }
-                        else if(errorCode==1){
+                        } else {
                             Toast.makeText(getApplicationContext(), "Invalid Username/ password, please try again", Toast.LENGTH_LONG).show();
                         }
 
@@ -191,7 +178,10 @@ public class LoginActivity extends AppCompatActivity {
             if (json.length() > 0)
 
             {
-                new JSONTask().execute(String.valueOf(json));
+               new JSONTask().execute(String.valueOf(json));
+                //Intent i = new Intent(this, MainActivity.class);
+                //startActivity(i);
+                //finish();
             }
 
         }
@@ -206,7 +196,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void registerView() {
-        Intent registerIntent = new Intent(this, UserRegister.class);
+        Intent registerIntent = new Intent(this, RegisterActivity.class);
         startActivity(registerIntent);
 
     }
@@ -228,5 +218,4 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 }
-
 
