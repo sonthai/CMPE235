@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
                 .add(R.id.frame, fragment, "square")
                 .commit(); */
 
-
         AHBottomNavigation bottomNavigation = (AHBottomNavigation) findViewById(R.id.bottom_navigation);
 
         AHBottomNavigationItem item1 = new AHBottomNavigationItem("Interact", R.drawable.interact, Color.parseColor(colors[0]));
@@ -121,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
                         getSupportFragmentManager()
                                 .beginTransaction()
                                 .replace(R.id.frame, commentFragment)
+                                .addToBackStack(null)
                                 .commit();
                 }
         }

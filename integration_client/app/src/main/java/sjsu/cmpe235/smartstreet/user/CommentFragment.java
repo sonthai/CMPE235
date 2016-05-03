@@ -1,5 +1,6 @@
 package sjsu.cmpe235.smartstreet.user;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -35,11 +36,14 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import sjsu.cmpe235.smartstreet.user.model.Comment;
+import sjsu.cmpe235.smartstreet.user.utils.CommentAdapter;
 import sjsu.cmpe235.smartstreet.user.utils.SessionHandler;
 
 public class CommentFragment extends Fragment {
@@ -48,30 +52,45 @@ public class CommentFragment extends Fragment {
     EditText commentText;
     ListView commentLisView;
     Button commentBttn;
+    Context context;
+    ArrayList<Comment> comments = new ArrayList<>();
     private final String postcommentUrl = "http://ec2-52-27-135-64.us-west-2.compute.amazonaws.com:3000/comments/add";
     private final String getcommentURL = "http://ec2-52-27-135-64.us-west-2.compute.amazonaws.com:3000/comments/list";
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_interact, container, false);
-        View v = inflater.inflate(R.layout.comment_fragment, null);
+        SimpleDateFormat df =  new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            comments.add(new Comment("Great App", 4.2f, "sdthai", df.parse("2016-03-21")));
+        } catch (ParseException pEx) {}
+        View v = inflater.inflate(R.layout.comment_fragment, container, false);
         ratingbar = (RatingBar) v.findViewById(R.id.ratingBar);
         commentText = (EditText) v.findViewById(R.id.commentBox);
-        commentLisView = (ListView) v.findViewById(R.id.commentlistView);
+        commentText.setText("Hello, World");
+        commentLisView = (ListView) v.findViewById(R.id.commentListView);
+        
         commentBttn = (Button) v.findViewById(R.id.commentButton);
 
-        final SessionHandler session = new SessionHandler();
+        //final SessionHandler session = new SessionHandler();
 
         commentBttn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(commentText.equals("")||ratingbar.equals("")){
+                context = getActivity();
+                commentLisView.setAdapter(new CommentAdapter(context, comments));
+                /*if(commentText.equals("")||ratingbar.equals("")){
                     Toast.makeText(getActivity().getApplicationContext(), "Field Required", Toast.LENGTH_LONG).show();
-                }
-                else
-                    userComment();
+                } */
+               // else
+                   // userComment();
 
             }
         });
@@ -79,7 +98,7 @@ public class CommentFragment extends Fragment {
     }
 
     // method to display all the comments in custom listView
-    private void displayComment() {
+   /* private void displayComment() {
 
         SessionHandler session = new SessionHandler(getActivity().getApplicationContext());
         session.checkLoginStatus();
@@ -290,7 +309,7 @@ public class CommentFragment extends Fragment {
         }
 
     }
-/*
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -298,7 +317,7 @@ public class CommentFragment extends Fragment {
         return true;
     }
 */
-    @Override
+ /*   @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
@@ -355,6 +374,5 @@ public class CommentFragment extends Fragment {
 
         }
     }
-
-
+*/
 }

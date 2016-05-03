@@ -1,11 +1,19 @@
 package sjsu.cmpe235.smartstreet.user.model;
 
+import java.util.Date;
+
 public class Comment {
     private String userName;
     private String comment;
     private float rating;
+    private Date date;
 
-    public Comment() {}
+    public Comment(String comment, Float rating, String userName, Date date) {
+        this.userName = userName;
+        this.rating = rating;
+        this.comment = comment;
+        this.date = date;
+    }
 
     public String getUserName() {
         return userName;
