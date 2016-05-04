@@ -21,14 +21,17 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import sjsu.cmpe235.smartstreet.admin.models.Sensor;
 import sjsu.cmpe235.smartstreet.admin.utils.CustomSensorAdapter;
-import sjsu.cmpe235.smartstreet.user.Constant.Constants;
+import sjsu.cmpe235.smartstreet.admin.Constants.Constants;
+
 import sjsu.cmpe235.smartstreet.user.R;
-import sjsu.cmpe235.smartstreet.user.model.Comment;
 
 
 /**
@@ -51,8 +54,6 @@ public class SensorMaintenanceFragment extends Fragment {
         View v =  inflater.inflate(R.layout.fragment_sesnormaint, container, false);
         sensorListView = (ListView) v.findViewById(R.id.sensorListView);
         new SensorAsync().execute(Constants.url + "/sensors/list");
-        adapter = new CustomSensorAdapter(getActivity().getApplicationContext(), sensors);
-        sensorListView.setAdapter(adapter);
 
         return v;
     }
@@ -97,7 +98,7 @@ public class SensorMaintenanceFragment extends Fragment {
                 for (int i = 0; i < parentArray.length(); i++) {
                     JSONObject finalObject = parentArray.getJSONObject(i);
                     String sensorId = finalObject.getString("sensor_id");
-                    String date = finalObject.getString("deployment_date");
+                    String date = Constants.getDateString(finalObject.getString("deployment_date"));
                     String status = finalObject.getString("sensor_status");
                     String type = finalObject.getString("sensor_type");
                     String location = finalObject.getString("sensor_location");
@@ -120,6 +121,12 @@ public class SensorMaintenanceFragment extends Fragment {
             }
 
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void unused){
+            adapter = new CustomSensorAdapter(getActivity().getApplicationContext(), sensors);
+            sensorListView.setAdapter(adapter);
         }
     }
 

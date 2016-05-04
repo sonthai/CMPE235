@@ -23,10 +23,9 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
 
-import sjsu.cmpe235.smartstreet.admin.models.Sensor;
 import sjsu.cmpe235.smartstreet.admin.models.Tree;
 import sjsu.cmpe235.smartstreet.admin.utils.CustomTreeAdapter;
-import sjsu.cmpe235.smartstreet.user.Constant.Constants;
+import sjsu.cmpe235.smartstreet.admin.Constants.Constants;
 import sjsu.cmpe235.smartstreet.user.R;
 
 
@@ -50,8 +49,6 @@ public class TreeMaintenanceFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_treemaint, container, false);
         treeListView = (ListView) v.findViewById(R.id.treeListView);
         new TreeAsync().execute(Constants.url + "/trees/list");
-        adapter = new CustomTreeAdapter(getActivity().getApplicationContext(), trees);
-        treeListView.setAdapter(adapter);
         return  v;
     }
 
@@ -95,7 +92,7 @@ public class TreeMaintenanceFragment extends Fragment {
                 for (int i = 0; i < parentArray.length(); i++) {
                     JSONObject finalObject = parentArray.getJSONObject(i);
                     String sensorId = finalObject.getString("sensor_id");
-                    String date = finalObject.getString("deployment_date");
+                    String date = Constants.getDateString(finalObject.getString("deployment_date"));
                     String status = finalObject.getString("tree_status");
                     String treeId = finalObject.getString("tree_id");
                     String location = finalObject.getString("tree_location");
@@ -118,6 +115,12 @@ public class TreeMaintenanceFragment extends Fragment {
             }
 
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void unused) {
+            adapter = new CustomTreeAdapter(getActivity().getApplicationContext(), trees);
+            treeListView.setAdapter(adapter);
         }
     }
 

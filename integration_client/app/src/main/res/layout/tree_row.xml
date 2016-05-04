@@ -5,25 +5,30 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tree_sensorId"/>
+        android:id="@+id/tree_sensorId"
+        android:textColor="#000000" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/treeId"/>
+        android:id="@+id/treeId"
+        android:textColor="#000000" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/treeStatus"/>
+        android:id="@+id/treeStatus"
+        android:textColor="#000000" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/treeDate"/>
+        android:id="@+id/treeDate"
+        android:textColor="#000000" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/treeLocation"/>
+        android:id="@+id/treeLocation"
+        android:textColor="#000000" />
 
 </RelativeLayout>

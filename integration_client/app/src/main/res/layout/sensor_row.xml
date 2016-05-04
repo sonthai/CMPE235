@@ -5,25 +5,30 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/sensorId"/>
+        android:id="@+id/sensorId"
+        android:textColor="#000000" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/sStatus"/>
+        android:id="@+id/sStatus"
+        android:textColor="#000000" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/sType"/>
+        android:id="@+id/sType"
+        android:textColor="#000000" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/sDate"/>
+        android:id="@+id/sDate"
+        android:textColor="#000000" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/sLocation"/>
+        android:id="@+id/sLocation"
+        android:textColorHighlight="#000000" />
 
 </RelativeLayout>
