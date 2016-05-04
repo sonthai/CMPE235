@@ -14,7 +14,8 @@
         android:text="Tree Maintenance"
         android:id="@+id/textView20"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp" />
 
     <ListView
         android:layout_width="wrap_content"

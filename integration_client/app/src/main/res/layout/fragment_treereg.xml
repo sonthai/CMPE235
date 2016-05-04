@@ -65,7 +65,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/editText10"
+        android:id="@+id/treeId"
         android:layout_above="@+id/textView17"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -77,38 +77,39 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/editText11"
+        android:id="@+id/sensorId"
         android:layout_above="@+id/textView18"
-        android:layout_alignLeft="@+id/editText10"
-        android:layout_alignStart="@+id/editText10" />
+        android:layout_alignLeft="@+id/treeId"
+        android:layout_alignStart="@+id/treeId" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/editText12"
+        android:id="@+id/treeStatus"
         android:layout_alignBottom="@+id/textView18"
-        android:layout_alignLeft="@+id/editText11"
-        android:layout_alignStart="@+id/editText11" />
+        android:layout_alignLeft="@+id/sensorId"
+        android:layout_alignStart="@+id/sensorId" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/editText13"
+        android:id="@+id/treeLocation"
         android:layout_alignBottom="@+id/textView19"
-        android:layout_alignLeft="@+id/editText12"
-        android:layout_alignStart="@+id/editText12" />
+        android:layout_alignLeft="@+id/treeStatus"
+        android:layout_alignStart="@+id/treeStatus" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Submit"
-        android:id="@+id/button4"
+        android:id="@+id/submit"
         android:layout_marginTop="92dp"
         android:layout_below="@+id/textView19"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:background="#2885bb" />
 
 </RelativeLayout>
