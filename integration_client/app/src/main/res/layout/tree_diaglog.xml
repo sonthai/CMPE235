@@ -58,7 +58,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/sensor_id"
         android:text="sensor_id"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="24dp"
+        android:maxLength="30"
         android:layout_below="@+id/tree_location"
         android:layout_centerHorizontal="true">
     </EditText>

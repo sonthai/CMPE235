@@ -63,8 +63,6 @@ public class TreeMaintenanceFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Tree tree = (Tree)  parent.getItemAtPosition(position);
                 openTreeDialog(tree);
-
-
             }
         });
         return  v;
@@ -96,6 +94,7 @@ public class TreeMaintenanceFragment extends Fragment {
             public void onClick(View v) {
                 String url = Constants.url + "/trees/delete/" + s.getTreeId();
                 adminServices.delete(url);
+                treeListView.invalidateViews();
                 dialog.dismiss();
             }
         });

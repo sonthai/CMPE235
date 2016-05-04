@@ -21,6 +21,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Interact"
             android:id="@+id/textView"
+            android:layout_marginTop="50dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginRight="10dp" />
