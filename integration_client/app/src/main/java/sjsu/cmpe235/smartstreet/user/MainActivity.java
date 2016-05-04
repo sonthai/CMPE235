@@ -2,9 +2,12 @@ package sjsu.cmpe235.smartstreet.user;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
@@ -21,8 +24,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Intent intent = getIntent();
         userName = intent.getStringExtra(USERNAME);
-
-
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         //noinspection ConstantConditions
@@ -118,11 +119,14 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case "#8080ff":
                         getSupportFragmentManager()
-                                .beginTransaction()
+                               .beginTransaction()
                                 .replace(R.id.frame, shareFragment)
                                 .addToBackStack(null)
-                                .commit();
-                        break;
+                              .commit();
+                                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("content://media/internal/images/media"));
+                                startActivity(intent);
+
+                       break;
                     case "#df80ff":
                         getSupportFragmentManager()
                                 .beginTransaction()
