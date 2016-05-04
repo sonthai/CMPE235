@@ -32,7 +32,14 @@
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
+<<<<<<< HEAD
 
+=======
+        <activity
+            android:name="sjsu.cmpe235.smartstreet.admin.AdminActivity"
+            android:label="@string/title_activity_admin"
+            android:theme="@style/AppTheme.NoActionBar" />
+>>>>>>> 08c7f74bf66b9709ff91c96a39b936900ed35bbe
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBqQqGqYL5j8nYcH3b8HKB1FTf1RKS7QLE"></meta-data>

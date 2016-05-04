@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 
+import sjsu.cmpe235.smartstreet.user.utils.NearPlaceTestFragment;
+
 public class MainActivity extends AppCompatActivity {
     private static final String USERNAME = "UserName";
     private static String userName = null;
@@ -71,19 +73,27 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNavigation.setCurrentItem(0);
 
+        final InteractFragment interactFragment = new InteractFragment();
+        final AboutFragment aboutFragment = new AboutFragment();
+        final CameraFragment cameraFragment = new CameraFragment();
+        // final NearbyFragment nearbyFragment = new NearbyFragment();
+        //final GPSTestingFragment nearbyFragment = new GPSTestingFragment();
+        final NearPlaceTestFragment nearbyFragment = new NearPlaceTestFragment();
+        final ShareFragment shareFragment = new ShareFragment();
+        final CommentFragment commentFragment = new CommentFragment();
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.frame, interactFragment)
+                .addToBackStack(null)
+                .commit();
+
         bottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
             @Override
             public void onTabSelected(int position, boolean wasSelected) {
-                final InteractFragment interactFragment = new InteractFragment();
-                final AboutFragment aboutFragment = new AboutFragment();
-                final CameraFragment cameraFragment = new CameraFragment();
-                final NearbyFragment nearbyFragment = new NearbyFragment();
-                final ShareFragment shareFragment = new ShareFragment();
-                final CommentFragment commentFragment = new CommentFragment();
-
                 switch(colors[position]){
                     case "#96CC7A":
-                        Toast.makeText(getApplicationContext(), "interact", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), "interact", Toast.LENGTH_SHORT).show();
                         getSupportFragmentManager()
                                 .beginTransaction()
                                 .add(R.id.frame, interactFragment)
@@ -91,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                                 .commit();
                         break;
                     case "#EA705D":
-                        Toast.makeText(getApplicationContext(),"about", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(),"about", Toast.LENGTH_SHORT).show();
                         getSupportFragmentManager()
                                 .beginTransaction()
                                 .replace(R.id.frame, aboutFragment)
@@ -127,6 +137,8 @@ public class MainActivity extends AppCompatActivity {
                                 .replace(R.id.frame, commentFragment)
                                 .addToBackStack(null)
                                 .commit();
+                        break;
+
                 }
         }
         });

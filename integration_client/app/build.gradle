@@ -31,4 +31,5 @@ dependencies {
     compile 'com.google.android.gms:play-services:8.4.0'
     compile 'com.facebook.android:facebook-android-sdk:4.+'
     compile 'me.dm7.barcodescanner:zxing:1.8.4'
+    compile 'com.google.android.gms:play-services:8.4.0'
 }

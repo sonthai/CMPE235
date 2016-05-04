@@ -25,6 +25,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.BufferUnderflowException;
 
+import sjsu.cmpe235.smartstreet.admin.AdminActivity;
 import sjsu.cmpe235.smartstreet.user.Constant.Constants;
 
 public class LoginActivity extends AppCompatActivity {
@@ -182,13 +183,13 @@ public class LoginActivity extends AppCompatActivity {
                         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(i);
                         finish();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Welcome User", Toast.LENGTH_LONG).show();
-                        //Intent i = new Intent(getApplicationContext(), AdminHome.class);
-                        //i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        //startActivity(i);
-                        //finish();
-                    }
+                    }// else {
+                       // Toast.makeText(getApplicationContext(), "Welcome User", Toast.LENGTH_LONG).show();
+                        Intent i = new Intent(getApplicationContext(), AdminActivity.class);
+                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(i);
+                        finish();
+                   // }
                 } else {
                     Toast.makeText(getApplicationContext(), "Invalid Username/ password, please try again", Toast.LENGTH_LONG).show();
                 }

@@ -24,7 +24,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="action_logout">Logout</string>
     <string name="title_activity_user_register">Register</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">Main Activity</string>
+    <string name="title_activity_admin">Admin Activity</string>
     <string name="action_Logout">Logout</string>
     <string name="scanner">Scanner</string>
     <string name="facebook_app_id">473201529551216</string>
