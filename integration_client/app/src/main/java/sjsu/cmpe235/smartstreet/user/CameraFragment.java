@@ -45,10 +45,9 @@ public class CameraFragment extends Fragment {
     private static final int RESULT_OK =-1;
     private String imgFileLocation="";
     static final int REQUEST_VIDEO_CAPTURE = 2;
-    private ImageView viewCapturePhoto;
     private ShareButton sharebutton;
     LoginManager loginmanager;
-    ImageButton imgbttn ;
+    ImageView imgView ;
     ImageButton cameraBttn;
     ImageButton videoBttn;
 
@@ -58,9 +57,9 @@ public class CameraFragment extends Fragment {
         CallbackManager callbackManager = CallbackManager.Factory.create();
         ShareDialog shareDialog = new ShareDialog(this);
         View v = inflater.inflate(R.layout.fragment_camera, container, false);
-        viewCapturePhoto = (ImageView)v.findViewById(R.id.photoView);
         sharebutton =(ShareButton) v.findViewById(R.id.share_btn);
         cameraBttn= (ImageButton) v.findViewById(R.id.cameraButton);
+        imgView= (ImageView) v.findViewById(R.id.photoView);
         cameraBttn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -179,10 +178,10 @@ public class CameraFragment extends Fragment {
         if(requestCode==ACTIVITY_START_CAMERA && resultCode==RESULT_OK) {
             // setting the sharing button visible
             sharebutton.setVisibility(View.VISIBLE);
-            imgbttn.setVisibility(View.VISIBLE);
+            imgView.setVisibility(View.VISIBLE);
             final Bitmap photoBitmap = BitmapFactory.decodeFile(imgFileLocation);
-            viewCapturePhoto.setImageBitmap(photoBitmap); // set decode image to imageview
-            viewCapturePhoto.setOnClickListener(new View.OnClickListener() {
+            imgView.setImageBitmap(photoBitmap); // set decode image to imageview
+            imgView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
