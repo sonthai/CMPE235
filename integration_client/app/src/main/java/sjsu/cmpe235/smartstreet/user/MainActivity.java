@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                     case "#66BBCC":
                         getSupportFragmentManager()
                                 .beginTransaction()
-                                .remove(cameraFragment)
+                                .replace(R.id.frame, cameraFragment)
                                 .commit();
                         break;
                     case "#ff8080":
