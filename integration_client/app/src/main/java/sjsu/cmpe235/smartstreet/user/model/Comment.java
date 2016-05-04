@@ -7,7 +7,6 @@ import java.util.Date;
 import sjsu.cmpe235.smartstreet.user.Constant.Constants;
 
 public class Comment {
-    SimpleDateFormat format = new SimpleDateFormat(Constants.DATEFORMAT);
     private String userName;
     private String comment;
     private float rating;
@@ -17,9 +16,7 @@ public class Comment {
         this.userName = userName;
         this.rating = rating;
         this.comment = comment;
-        try {
-            this.date = format.format(format.parse(date));
-        } catch (ParseException e) {}
+        this.date = date;
     }
 
     public Comment() {}

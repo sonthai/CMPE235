@@ -21,6 +21,7 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import sjsu.cmpe235.smartstreet.user.CommentFragment;
@@ -78,7 +79,6 @@ public class CommentServices {
                 }
 
                 String finalJson = buffer.toString();
-                System.out.println("Final Json" + finalJson);
                 JSONObject parentObject = new JSONObject(finalJson);
                 JSONArray parentArray = parentObject.getJSONArray("message");
                 for (int i = 0; i < parentArray.length(); i++) {

@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String USERNAME = "UserName";
     private static String userName = null;
     Toolbar toolbar;
+    Button logoutBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,23 +25,25 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Intent intent = getIntent();
         userName = intent.getStringExtra(USERNAME);
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //noinspection ConstantConditions
         getSupportActionBar().setTitle("SmartStreet");
 
-//        int[] colors = {R.color.bottomtab_0, R.color.bottomtab_1, R.color.bottomtab_2};
+        logoutBtn = (Button) findViewById(R.id.logoutBtn);
+        if (userName != null) {
+            logoutBtn.setVisibility(View.VISIBLE);
+            logoutBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    userName = null;
+                    Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(loginIntent);
+                }
+            });
+        }
+
         final String[] colors = {"#96CC7A", "#EA705D", "#66BBCC","#ff8080","#8080ff","#df80ff"};
-
-      /*  final SquareFragment fragment = new SquareFragment();
-        Bundle bundle = new Bundle();
-        bundle.putInt("color", Color.parseColor(colors[0]));
-        fragment.setArguments(bundle);
-
-        getSupportFragmentManager()
-                .beginTransaction()
-                .add(R.id.frame, fragment, "square")
-                .commit(); */
 
         AHBottomNavigation bottomNavigation = (AHBottomNavigation) findViewById(R.id.bottom_navigation);
 
@@ -71,11 +74,6 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
             @Override
             public void onTabSelected(int position, boolean wasSelected) {
-                // Do something cool here...
-
-              // fragment.updateColor(Color.parseColor(colors[position]));
-           //     Toast.makeText(getApplicationContext(), colors[position], Toast.LENGTH_SHORT).show();
-
                 final InteractFragment interactFragment = new InteractFragment();
                 final AboutFragment aboutFragment = new AboutFragment();
                 final CameraFragment cameraFragment = new CameraFragment();
@@ -86,8 +84,6 @@ public class MainActivity extends AppCompatActivity {
                 switch(colors[position]){
                     case "#96CC7A":
                         Toast.makeText(getApplicationContext(), "interact", Toast.LENGTH_SHORT).show();
-
-
                         getSupportFragmentManager()
                                 .beginTransaction()
                                 .add(R.id.frame, interactFragment)
@@ -95,9 +91,7 @@ public class MainActivity extends AppCompatActivity {
                                 .commit();
                         break;
                     case "#EA705D":
-
                         Toast.makeText(getApplicationContext(),"about", Toast.LENGTH_SHORT).show();
-
                         getSupportFragmentManager()
                                 .beginTransaction()
                                 .replace(R.id.frame, aboutFragment)

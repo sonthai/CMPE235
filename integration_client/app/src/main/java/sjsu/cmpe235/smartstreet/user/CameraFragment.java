@@ -1,5 +1,7 @@
 package sjsu.cmpe235.smartstreet.user;
 
+import android.content.Intent;
+
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -247,6 +249,5 @@ public class CameraFragment extends Fragment {
         sharingIntent.putExtra(Intent.EXTRA_STREAM, uri);
         startActivity(Intent.createChooser(sharingIntent, "Share via!"));
     }
-
 
 }
