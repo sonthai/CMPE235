@@ -87,7 +87,7 @@ public class SensorRegistrationFragment extends Fragment {
             try {
                 json.put("sensor_id", sensor_id);
                 json.put("sensor_type", sensor_type);
-                json.put("tree_location", sensor_location);
+                json.put("sensor_location", sensor_location);
                 json.put("sensor_status", sensor_status);
 
 

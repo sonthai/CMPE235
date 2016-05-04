@@ -1,31 +1,51 @@
 package sjsu.cmpe235.smartstreet.admin;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 
+import sjsu.cmpe235.smartstreet.user.LoginActivity;
 import sjsu.cmpe235.smartstreet.user.R;
 
 /**
  * Created by Son Thai on 5/4/2016.
  */
 public class AdminActivity extends AppCompatActivity {
+    private static final String USERNAME = "UserName";
+    private static String userName = null;
     Toolbar toolbar;
+    Button logoutBtn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
+        Intent intent = getIntent();
+        userName = intent.getStringExtra(USERNAME);
 
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("SmartStreet");
+
+        logoutBtn = (Button) findViewById(R.id.logoutBtn);
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                userName = null;
+                Intent loginIntent = new Intent(AdminActivity.this, LoginActivity.class);
+                startActivity(loginIntent);
+            }
+        });
 
         final String[] colors = {"#96CC7A", "#EA705D", "#66BBCC","#ff8080"};
 
