@@ -23,7 +23,6 @@ public class CommentAdapter extends BaseAdapter {
 
     public CommentAdapter(Context context,  ArrayList<Comment> comments) {
         this.comments = comments;
-        //this.lv = lv;
         this.mInflater = LayoutInflater.from(context);
     }
     @Override
@@ -59,8 +58,7 @@ public class CommentAdapter extends BaseAdapter {
         holder.userName.setText(comments.get(position).getUserName());
         holder.comment.setText(comments.get(position).getComment());
         holder.rating.setRating(comments.get(position).getRating());
-        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
-        holder.date.setText(format.format(comments.get(position).getCommentDate()));
+        holder.date.setText(comments.get(position).getDate());
 
         return convertView;
     }

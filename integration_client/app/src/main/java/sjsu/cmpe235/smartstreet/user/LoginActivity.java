@@ -26,6 +26,7 @@ import java.net.URL;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "Log";
+    private static final String USERNAME = "UserName";
     private final String loginUrl = "http://ec2-52-27-135-64.us-west-2.compute.amazonaws.com:3000/users/login";
 
     EditText usernameText;
@@ -151,6 +152,7 @@ public class LoginActivity extends AppCompatActivity {
                             if (mode.equals(user)) {
                                 Toast.makeText(getApplicationContext(), "Welcome User", Toast.LENGTH_LONG).show();
                                 Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                                i.putExtra(USERNAME, usernameText.getText().toString());
                                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(i);
                                 finish();

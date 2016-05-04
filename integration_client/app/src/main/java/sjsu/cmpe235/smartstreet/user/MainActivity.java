@@ -1,5 +1,6 @@
 package sjsu.cmpe235.smartstreet.user;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,12 +11,16 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String USERNAME = "UserName";
+    private static String userName = null;
     Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Intent intent = getIntent();
+        userName = intent.getStringExtra(USERNAME);
 
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -85,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
                         getSupportFragmentManager()
                                 .beginTransaction()
                                 .add(R.id.frame, interactFragment)
+                                .addToBackStack(null)
                                 .commit();
                         break;
                     case "#EA705D":
@@ -95,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
                                 .beginTransaction()
                                 .replace(R.id.frame, aboutFragment)
                                 .addToBackStack(null)
-                                //.remove(aboutFragment)
                                 .commit();
                         break;
                     case "#66BBCC":
@@ -107,13 +112,15 @@ public class MainActivity extends AppCompatActivity {
                     case "#ff8080":
                         getSupportFragmentManager()
                                 .beginTransaction()
-                                .remove(nearbyFragment)
+                                .replace(R.id.frame, nearbyFragment)
+                                .addToBackStack(null)
                                 .commit();
                         break;
                     case "#8080ff":
                         getSupportFragmentManager()
                                 .beginTransaction()
-                                .remove(shareFragment)
+                                .replace(R.id.frame, shareFragment)
+                                .addToBackStack(null)
                                 .commit();
                         break;
                     case "#df80ff":
@@ -128,6 +135,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+    public String getCurrentUser() {
+        return userName;
+    }
 
 }

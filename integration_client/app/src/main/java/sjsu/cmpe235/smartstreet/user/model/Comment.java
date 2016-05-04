@@ -1,19 +1,28 @@
 package sjsu.cmpe235.smartstreet.user.model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import sjsu.cmpe235.smartstreet.user.Constant.Constants;
+
 public class Comment {
+    SimpleDateFormat format = new SimpleDateFormat(Constants.DATEFORMAT);
     private String userName;
     private String comment;
     private float rating;
-    private Date date;
+    private String date;
 
-    public Comment(String comment, Float rating, String userName, Date date) {
+    public Comment(String comment, float rating, String userName, String date) {
         this.userName = userName;
         this.rating = rating;
         this.comment = comment;
-        this.date = date;
+        try {
+            this.date = format.format(format.parse(date));
+        } catch (ParseException e) {}
     }
+
+    public Comment() {}
 
     public String getUserName() {
         return userName;
@@ -39,7 +48,7 @@ public class Comment {
         this.rating = rating;
     }
 
-    public Date getCommentDate() {return date;}
-
+    public String getDate() {return date;}
+    public void setDate(String date) {this.date = date;}
 }
 
