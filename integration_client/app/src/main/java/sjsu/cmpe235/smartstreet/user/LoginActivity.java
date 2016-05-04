@@ -123,6 +123,7 @@ public class LoginActivity extends AppCompatActivity {
                 System.out.println(JsonDATA);
                 writer.flush();
                 writer.close();
+
                 InputStream inputStream = conn.getInputStream();
                 StringBuffer buffer = new StringBuffer();
                 if (inputStream == null) {

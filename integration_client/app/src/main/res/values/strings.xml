@@ -15,6 +15,10 @@
     <string name="email">Email ID</string>
     <string name="contact">Contact No</string>
 
+    <!--- AboutFragment -->
+    <string name="scanBttn">Scan</string>
+    <string name="aboutFragment">About</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

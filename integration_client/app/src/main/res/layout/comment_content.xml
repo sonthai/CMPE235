@@ -16,6 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
+        android:visibility="gone"
         android:ems="10"
         android:id="@+id/commentBox"
         android:hint="Comment Here"
@@ -29,6 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ratingBar"
+        android:visibility="gone"
         android:layout_below="@+id/commentBox"
         android:layout_centerHorizontal="true" />
 
@@ -37,6 +39,7 @@
         android:layout_height="wrap_content"
         android:text="comment"
         android:id="@+id/commentButton"
+        android:visibility="gone"
         android:layout_below="@+id/ratingBar"
         android:layout_centerHorizontal="true"
         android:background="#3076cc"
@@ -44,14 +47,14 @@
 
     <ListView
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/commentlistView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/commentButton"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="40dp" />
 
 
 </RelativeLayout>
