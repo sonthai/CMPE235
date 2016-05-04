@@ -36,8 +36,8 @@ public class AboutFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.about_fragment, container, false);
-        formatText = (TextView) v.findViewById(R.id.scan_format);//instantiate variable using ID values
-        contentText = (TextView) v.findViewById(R.id.scan_content);
+        formatText = (TextView) v.findViewById(R.id.scanFormat);//instantiate variable using ID values
+        contentText = (TextView) v.findViewById(R.id.content);
         scanBtn = (ImageButton) v.findViewById(R.id.scanButton);
         scanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
