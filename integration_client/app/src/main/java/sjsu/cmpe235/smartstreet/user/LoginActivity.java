@@ -23,6 +23,7 @@ import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.BufferUnderflowException;
 
 import sjsu.cmpe235.smartstreet.user.Constant.Constants;
 
@@ -33,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText usernameText;
     EditText passwordText;
-    Button signBttn;
+    Button signBttn, registerBttn, skipBttn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,24 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 signinUser(v);
+            }
+        });
+
+        registerBttn = (Button) findViewById(R.id.regBtn);
+        registerBttn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(registerIntent);
+            }
+        });
+
+        skipBttn = (Button) findViewById(R.id.skipBtn);
+        skipBttn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -69,153 +88,115 @@ public class LoginActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            class JSONTask extends AsyncTask<String, String, String> {
-                @Override
-                protected void onPreExecute() {
-                    super.onPreExecute();
+            if (json.length() > 0) {
+               new AuthenticateAsync().execute(String.valueOf(json));
+            }
+        }
+    }
+
+    private class AuthenticateAsync extends AsyncTask<String, String, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            HttpURLConnection conn = null;
+            BufferedReader reader = null;
+            String JsonResponse = null;
+            String JsonDATA = params[0];
+            URL url;
+
+            try {
+
+                url = new URL(loginUrl);
+                conn = (HttpURLConnection) url.openConnection();
+
+                conn.setRequestMethod("POST");
+                conn.setRequestProperty("Content-Type", "application/json");
+                conn.setRequestProperty("Accept", "application/json");
+                conn.setDoInput(true);
+                conn.setDoOutput(true);
+                Writer writer = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream(), "UTF-8"));
+                writer.write(JsonDATA);
+                System.out.println(JsonDATA);
+                writer.flush();
+                writer.close();
+                InputStream inputStream = conn.getInputStream();
+                StringBuffer buffer = new StringBuffer();
+                if (inputStream == null) {
+                    // Nothing to do.
+                    return null;
                 }
+                reader = new BufferedReader(new InputStreamReader(inputStream));
 
-                @Override
-                protected String doInBackground(String... params) {
-                    HttpURLConnection conn = null;
-                    BufferedReader reader = null;
-                    String JsonResponse = null;
-                    String JsonDATA = params[0];
-                    URL url;
-
-                    try {
-
-                        url = new URL(loginUrl);
-                        conn = (HttpURLConnection) url.openConnection();
-
-                        conn.setRequestMethod("POST");
-                        conn.setRequestProperty("Content-Type", "application/json");
-                        conn.setRequestProperty("Accept", "application/json");
-                        conn.setDoInput(true);
-                        conn.setDoOutput(true);
-                        Writer writer = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream(), "UTF-8"));
-                        writer.write(JsonDATA);
-                        System.out.println(JsonDATA);
-                        writer.flush();
-                        writer.close();
-                        InputStream inputStream = conn.getInputStream();
-                        StringBuffer buffer = new StringBuffer();
-                        if (inputStream == null) {
-                            // Nothing to do.
-                            return null;
-                        }
-                        reader = new BufferedReader(new InputStreamReader(inputStream));
-
-                        String inputLine;
-                        while ((inputLine = reader.readLine()) != null)
-                            buffer.append(inputLine + "\n");
-                        if (buffer.length() == 0) {
-                            // Stream was empty. No point in parsing.
-                            return null;
-                        }
-                        JsonResponse = buffer.toString();
-                        System.out.println(JsonResponse);
-
-                        //response data
-                        Log.i(TAG, JsonResponse);
-                        //send to post execute
-                        return JsonResponse;
-
-
-                    } catch (UnsupportedEncodingException e2) {
-                        e2.printStackTrace();
-                    } catch (IOException e2) {
-                        e2.printStackTrace();
-                    } finally {
-                        try {
-
-                            reader.close();
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
-                        }
-                    }
-
-                    return JsonResponse;
-
+                String inputLine;
+                while ((inputLine = reader.readLine()) != null)
+                    buffer.append(inputLine + "\n");
+                if (buffer.length() == 0) {
+                    // Stream was empty. No point in parsing.
+                    return null;
                 }
+                JsonResponse = buffer.toString();
+                System.out.println(JsonResponse);
 
-                @Override
-                protected void onPostExecute(String response) {
-                    super.onPostExecute(response);
-                    try {
-                        JSONObject parentObject = new JSONObject(response);
-                        int errorCode = parentObject.getInt("errorCode");
-                        String mode = parentObject.optString("mode");
-                        String user = "user";
-                        System.out.println(errorCode);
-                        if (errorCode == 0) {
-                            if (mode.equals(user)) {
-                                Toast.makeText(getApplicationContext(), "Welcome User", Toast.LENGTH_LONG).show();
-                                Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                                i.putExtra(USERNAME, usernameText.getText().toString());
-                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                startActivity(i);
-                                finish();
-                            } else {
-                                Toast.makeText(getApplicationContext(), "Welcome User", Toast.LENGTH_LONG).show();
-                                //Intent i = new Intent(getApplicationContext(), AdminHome.class);
-                                //i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                //startActivity(i);
-                                //finish();
-
-                            }
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Invalid Username/ password, please try again", Toast.LENGTH_LONG).show();
-                        }
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                //response data
+                Log.i(TAG, JsonResponse);
+                //send to post execute
+                return JsonResponse;
 
 
+            } catch (UnsupportedEncodingException e2) {
+                e2.printStackTrace();
+            } catch (IOException e2) {
+                e2.printStackTrace();
+            } finally {
+                try {
+
+                    reader.close();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
             }
 
-            if (json.length() > 0)
+            return JsonResponse;
 
-            {
-               new JSONTask().execute(String.valueOf(json));
-                //Intent i = new Intent(this, MainActivity.class);
-                //startActivity(i);
-                //finish();
+        }
+
+        @Override
+        protected void onPostExecute(String response) {
+            super.onPostExecute(response);
+            try {
+                JSONObject parentObject = new JSONObject(response);
+                int errorCode = parentObject.getInt("errorCode");
+                String mode = parentObject.optString("mode");
+                String user = "user";
+                System.out.println(errorCode);
+                if (errorCode == 0) {
+                    if (mode.equals(user)) {
+                        Toast.makeText(getApplicationContext(), "Welcome User", Toast.LENGTH_LONG).show();
+                        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                        i.putExtra(USERNAME, usernameText.getText().toString());
+                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(i);
+                        finish();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Welcome User", Toast.LENGTH_LONG).show();
+                        //Intent i = new Intent(getApplicationContext(), AdminHome.class);
+                        //i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        //startActivity(i);
+                        //finish();
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "Invalid Username/ password, please try again", Toast.LENGTH_LONG).show();
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-
-        }
-
-
-    }
-
-    private void viewMain() {
-
-        Intent loginIntent = new Intent(this, MainActivity.class);
-        startActivity(loginIntent);
-    }
-
-    private void registerView() {
-        Intent registerIntent = new Intent(this, RegisterActivity.class);
-        startActivity(registerIntent);
-
-    }
-
-
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.loginBtn:
-                viewMain();
-                break;
-
-            case R.id.regBtn:
-                registerView();
-                break;
-            case R.id.skipBtn:
-                viewMain();
-                break;
         }
     }
+
 }
 
