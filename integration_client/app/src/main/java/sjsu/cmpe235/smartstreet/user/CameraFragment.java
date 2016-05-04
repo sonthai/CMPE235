@@ -47,7 +47,7 @@ public class CameraFragment extends Fragment {
     private static final int RESULT_OK =-1;
     private String imgFileLocation="";
     static final int REQUEST_VIDEO_CAPTURE = 2;
-    private ShareButton sharebutton;
+    ShareButton sharebutton;
     LoginManager loginmanager;
     ImageView imgView ;
     ImageButton cameraBttn;
@@ -56,10 +56,10 @@ public class CameraFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         FacebookSdk.sdkInitialize((getActivity()));
-        CallbackManager callbackManager = CallbackManager.Factory.create();
-        ShareDialog shareDialog = new ShareDialog(this);
         View v = inflater.inflate(R.layout.fragment_camera, container, false);
-        sharebutton =(ShareButton) v.findViewById(R.id.share_btn);
+        FacebookSdk.sdkInitialize((getActivity()));
+        CallbackManager callbackManager = CallbackManager.Factory.create();
+        sharebutton =(ShareButton)v.findViewById(R.id.share_btn);
         cameraBttn= (ImageButton) v.findViewById(R.id.cameraButton);
         imgView= (ImageView) v.findViewById(R.id.photoView);
         cameraBttn.setOnClickListener(new View.OnClickListener() {
@@ -180,7 +180,6 @@ public class CameraFragment extends Fragment {
         if(requestCode==ACTIVITY_START_CAMERA && resultCode==RESULT_OK) {
             // setting the sharing button visible
             sharebutton.setVisibility(View.VISIBLE);
-            imgView.setVisibility(View.VISIBLE);
             final Bitmap photoBitmap = BitmapFactory.decodeFile(imgFileLocation);
             imgView.setImageBitmap(photoBitmap); // set decode image to imageview
             imgView.setOnClickListener(new View.OnClickListener() {
@@ -192,11 +191,10 @@ public class CameraFragment extends Fragment {
                             .setBitmap(photoBitmap)
                             .setCaption("First Post")
                             .build();
-                    SharePhotoContent content = new SharePhotoContent.Builder()
-                            .addPhoto(photo)
-                            .build();
+                    SharePhotoContent content = new SharePhotoContent.Builder().addPhoto(photo).build();
                     sharebutton.setShareContent(content);
                     sharebutton.performClick();
+
                 }
             });
         }

@@ -12,7 +12,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="50dp">
+        android:layout_marginTop="50dp"
+        android:background="#ffffff">
 
         <TextView
             android:layout_width="wrap_content"
@@ -109,7 +110,8 @@
             android:id="@+id/onButton"
             android:layout_alignTop="@+id/offButton"
             android:layout_marginRight="20dp"
-            android:layout_toStartOf="@+id/textView" />
+            android:layout_toStartOf="@+id/textView"
+            android:background="#46dc3e" />
 
         <Button
             android:layout_width="wrap_content"
@@ -119,7 +121,8 @@
             android:layout_marginBottom="83dp"
             android:layout_alignParentBottom="true"
             android:layout_marginRight="20dp"
-            android:layout_alignEnd="@+id/treeId" />
+            android:layout_alignEnd="@+id/treeId"
+            android:background="#e22b2b" />
 
         <TextView
             android:layout_width="wrap_content"

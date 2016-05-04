@@ -9,7 +9,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.grafixartist.bottomnav.CameraFragment">
+        tools:context="com.grafixartist.bottomnav.CameraFragment"
+        android:background="#ffffff">
 
 
         <TextView
@@ -27,25 +28,20 @@
             android:text="Camera"
             android:id="@+id/cameraButton"
             android:layout_marginRight="38dp"
+            android:src="@drawable/photos"
             android:layout_below="@+id/textView15"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="48dp"
-            android:layout_alignEnd="@+id/textView15"
-            android:src="@android:drawable/ic_menu_camera" />
+            android:layout_toStartOf="@+id/textView15"
+            android:layout_marginTop="49dp" />
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Video"
             android:id="@+id/videoButton"
-            android:layout_alignTop="@+id/cameraButton"
-            android:layout_alignLeft="@+id/textView15"
-            android:layout_alignStart="@+id/textView15"
             android:layout_marginLeft="38dp"
-            android:layout_marginStart="38dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:src="@android:drawable/ic_menu_slideshow" />
+            android:src="@drawable/video1"
+            android:layout_above="@+id/photoView"
+            android:layout_toEndOf="@+id/textView15" />
 
         <ImageView
             android:layout_width="match_parent"
@@ -65,7 +61,7 @@
             android:layout_width="137dp"
             android:visibility="invisible"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/share"
+            android:contentDescription="Share"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.07"
             android:layout_below="@+id/photoView"

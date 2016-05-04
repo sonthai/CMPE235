@@ -7,7 +7,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="sjsu.cmpe235.smartstreet.user.RegisterActivity">
+    tools:context="sjsu.cmpe235.smartstreet.user.RegisterActivity"
+    android:background="#b8b894">
 
     <TextView
         android:layout_width="wrap_content"
@@ -145,11 +146,14 @@
 
     <Button
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="@string/registerBtn"
+        android:textColor="#FFFFFF"
+        android:background="#1B5E20"
         android:id="@+id/registerButton"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginTop="36dp"
+        android:layout_below="@+id/textView14"
+        android:layout_toEndOf="@+id/textView14" />
 
 </RelativeLayout>

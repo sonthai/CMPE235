@@ -7,38 +7,10 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="sjsu.cmpe235.smartstreet.user.LoginActivity">
+    android:background="#b8b894"
+    tools:context="sjsu.cmpe235.smartstreet.user.LoginActivity"
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/app_name"
-        android:id="@+id/appName"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/username"
-        android:id="@+id/textView6"
-        android:layout_below="@+id/appName"
-        android:layout_toLeftOf="@+id/appName"
-        android:layout_toStartOf="@+id/appName"
-        android:layout_marginTop="41dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/password"
-        android:id="@+id/textView7"
-        android:layout_below="@+id/textView6"
-        android:layout_toLeftOf="@+id/appName"
-        android:layout_toStartOf="@+id/appName"
-        android:layout_marginTop="52dp" />
+    android:orientation="vertical">
 
     <EditText
         android:layout_width="wrap_content"
@@ -46,9 +18,22 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/idText"
-        android:layout_above="@+id/textView7"
-        android:layout_alignParentRight="true"
+        android:textColor="#000000"
+        android:textColorHighlight="#000000"
+        android:layout_alignBottom="@+id/textView6"
         android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/username"
+        android:id="@+id/textView6"
+        android:textColor="#000000"
+        android:textColorHighlight="#000000"
+        android:layout_above="@+id/textView7"
+        android:layout_alignStart="@+id/textView7"
+        android:layout_marginBottom="30dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -58,35 +43,82 @@
         android:id="@+id/pwdText"
         android:layout_alignBottom="@+id/textView7"
         android:layout_alignLeft="@+id/idText"
-        android:layout_alignStart="@+id/idText" />
+        android:layout_alignStart="@+id/idText"
+        android:textColor="#000000"
+        android:textColorHighlight="#000000"
+        android:layout_marginBottom="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="49dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/password"
+        android:id="@+id/textView7"
+        android:textColor="#000000"
+        android:layout_marginBottom="40dp"
+        android:layout_above="@+id/loginBtn"
+        android:layout_alignStart="@+id/imageView2" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
         android:text="@string/loginBtn"
+        android:textColor="#ffffff"
         android:id="@+id/loginBtn"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/pwdText"
-        android:layout_toStartOf="@+id/pwdText" />
+        android:background="#1B5E20"
+        android:layout_alignBottom="@+id/skipBtn"
+        android:layout_centerHorizontal="true" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
         android:text="@string/registerBtn"
         android:id="@+id/regBtn"
-        android:layout_alignTop="@+id/loginBtn"
-        android:layout_toRightOf="@+id/skipBtn"
-        android:layout_toEndOf="@+id/skipBtn" />
+        android:background="#3498db"
+        android:textColor="#FFFFFF"
+        android:layout_below="@+id/textView7"
+        android:layout_alignEnd="@+id/pwdText" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
         android:text="@string/skipBtn"
         android:id="@+id/skipBtn"
+        android:background="#e21414"
+        android:textColor="#ffffff"
+
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="67dp" />
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="142dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:src="@drawable/logo4"
+        android:layout_above="@+id/idText"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView2"
+        android:src="@drawable/barcode"
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/skipBtn" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Scan QR code to visit our website"
+        android:id="@+id/textView4"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        android:layout_alignStart="@+id/loginBtn"
+        android:layout_alignBottom="@+id/imageView2" />
+
 
 </RelativeLayout>

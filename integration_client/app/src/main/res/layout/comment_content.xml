@@ -10,7 +10,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="sjsu.cmpe235.smartstreet.user.CommentFragment"
-    tools:showIn="@layout/comment_fragment">
+    tools:showIn="@layout/comment_fragment"
+    android:background="#FFFFFFFF">
 
     <EditText
         android:layout_width="wrap_content"
@@ -54,7 +55,8 @@
         android:layout_below="@+id/commentButton"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="40dp" />
+        android:layout_marginTop="40dp"
+        android:background="#FFFFFFFF" />
 
 
 </RelativeLayout>

@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import sjsu.cmpe235.smartstreet.user.Constant.Constants;
@@ -24,7 +25,7 @@ import sjsu.cmpe235.smartstreet.user.Constant.Constants;
  */
 public class AboutFragment extends Fragment {
     private TextView formatText, contentText;
-    Button scanBtn;
+    ImageButton scanBtn;
 
     public AboutFragment() {
         // Required empty public constructor
@@ -35,9 +36,9 @@ public class AboutFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.about_fragment, container, false);
-        //formatText = (TextView) v.findViewById(R.id.scan_format);//instantiate variable using ID values
-        contentText = (TextView) v.findViewById(R.id.barcodeInfo);
-        scanBtn = (Button) v.findViewById(R.id.scanBtn);
+        formatText = (TextView) v.findViewById(R.id.scan_format);//instantiate variable using ID values
+        contentText = (TextView) v.findViewById(R.id.scan_content);
+        scanBtn = (ImageButton) v.findViewById(R.id.scanButton);
         scanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,7 +98,7 @@ public class AboutFragment extends Fragment {
                 String contents = intent.getStringExtra("SCAN_RESULT"); // store scan result
                 String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
 
-                //formatText.setText("FORMAT: " + format); // display result in textview
+                formatText.setText("FORMAT: " + format); // display result in textview
                 contentText.setText("CONTENT: " + contents);
 
 
