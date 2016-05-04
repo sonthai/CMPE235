@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -47,7 +48,7 @@ public class CameraFragment extends Fragment {
     private static final int RESULT_OK =-1;
     private String imgFileLocation="";
     static final int REQUEST_VIDEO_CAPTURE = 2;
-    ShareButton sharebutton;
+    Button sharebutton;
     LoginManager loginmanager;
     ImageView imgView ;
     ImageButton cameraBttn;
@@ -59,7 +60,7 @@ public class CameraFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_camera, container, false);
         FacebookSdk.sdkInitialize((getActivity()));
         CallbackManager callbackManager = CallbackManager.Factory.create();
-        sharebutton =(ShareButton)v.findViewById(R.id.share_btn);
+        sharebutton =(Button)v.findViewById(R.id.shareButton);
         cameraBttn= (ImageButton) v.findViewById(R.id.cameraButton);
         imgView= (ImageView) v.findViewById(R.id.photoView);
         cameraBttn.setOnClickListener(new View.OnClickListener() {
@@ -187,14 +188,14 @@ public class CameraFragment extends Fragment {
                 public void onClick(View v) {
 
                     // share file to facebook will be called  using facebook sdk and registering app on facebook developer and using the sdk
-                    SharePhoto photo = new SharePhoto.Builder()
-                            .setBitmap(photoBitmap)
-                            .setCaption("First Post")
-                            .build();
-                    SharePhotoContent content = new SharePhotoContent.Builder().addPhoto(photo).build();
-                    sharebutton.setShareContent(content);
-                    sharebutton.performClick();
+                    shareFile();
 
+                }
+            });
+            sharebutton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    shareFile();
                 }
             });
         }

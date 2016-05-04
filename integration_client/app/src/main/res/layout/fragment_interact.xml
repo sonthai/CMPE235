@@ -71,7 +71,9 @@
                 android:text="Sound"
                 android:id="@+id/soundButton"
                 android:checked="false"
-                android:layout_marginLeft="100dp" />
+                android:layout_marginLeft="70dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="0.08" />
         </RadioGroup>
 
         <RadioGroup
@@ -95,7 +97,7 @@
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Green"
+                android:text="Red"
                 android:visibility="invisible"
                 android:id="@+id/greenButton"
                 android:checked="false"
@@ -132,7 +134,7 @@
             android:id="@+id/textView4"
             android:layout_above="@+id/radioGrpAction"
             android:layout_toStartOf="@+id/offButton"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="20dp"
             android:layout_marginBottom="10dp"
             android:layout_alignEnd="@+id/textView" />
 

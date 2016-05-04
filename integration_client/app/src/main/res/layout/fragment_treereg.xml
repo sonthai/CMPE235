@@ -14,8 +14,7 @@
         android:text="Tree Registration"
         android:id="@+id/textView15"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="28dp" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -58,7 +57,8 @@
         android:id="@+id/textView19"
         android:layout_centerVertical="true"
         android:layout_alignRight="@+id/textView18"
-        android:layout_alignEnd="@+id/textView18" />
+        android:layout_alignEnd="@+id/textView18"
+        android:layout_marginTop="30dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -100,7 +100,8 @@
         android:id="@+id/treeLocation"
         android:layout_alignBottom="@+id/textView19"
         android:layout_alignLeft="@+id/treeStatus"
-        android:layout_alignStart="@+id/treeStatus" />
+        android:layout_alignStart="@+id/treeStatus"
+        android:layout_marginTop="30dp" />
 
     <Button
         android:layout_width="wrap_content"
