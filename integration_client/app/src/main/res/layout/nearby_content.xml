@@ -18,12 +18,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
         android:orientation="horizontal">
         <Button
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:background="@drawable/search"
-            android:onClick="searchLocation"/>
+            android:id="@+id/searchLocationBtn" />
 
         <EditText
             android:id="@+id/location_search_box"

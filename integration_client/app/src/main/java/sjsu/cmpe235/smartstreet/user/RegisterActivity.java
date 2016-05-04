@@ -24,6 +24,8 @@ import java.io.Writer;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import sjsu.cmpe235.smartstreet.user.Constant.Constants;
+
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -35,19 +37,19 @@ public class RegisterActivity extends AppCompatActivity {
     EditText lastNameText;
     Button submitBttn;
     EditText textuserName;
-    private final String registerUrl = "http://ec2-52-27-135-64.us-west-2.compute.amazonaws.com:3000/users/register";
+    private final String registerUrl = Constants.url + "/users/register";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        textName = (EditText) findViewById(R.id.fnameText);
+        textName = (EditText) findViewById(R.id.firstNameText);
         textPassword = (EditText) findViewById(R.id.passwordText);
         textEmailid = (EditText) findViewById(R.id.emailText);
-        textuserName = (EditText) findViewById(R.id.usernameTxt);
+        textuserName = (EditText) findViewById(R.id.usernameText);
         phoneText = (EditText) findViewById(R.id.phoneText);
-        lastNameText = (EditText) findViewById(R.id.lnText);
+        lastNameText = (EditText) findViewById(R.id.lastNameText);
         submitBttn = (Button) findViewById(R.id.registerButton);
         submitBttn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,7 +156,6 @@ public class RegisterActivity extends AppCompatActivity {
 
                     return JsonResponse;
                 }
-
 
                 @Override
                 protected void onPostExecute(String s) {
