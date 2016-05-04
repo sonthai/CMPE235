@@ -24,10 +24,12 @@ import java.io.Writer;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import sjsu.cmpe235.smartstreet.user.Constant.Constants;
+
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "Log";
     private static final String USERNAME = "UserName";
-    private final String loginUrl = "http://ec2-52-27-135-64.us-west-2.compute.amazonaws.com:3000/users/login";
+    private final String loginUrl = Constants.url + "/users/login";
 
     EditText usernameText;
     EditText passwordText;
@@ -40,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
 
         usernameText = (EditText) findViewById(R.id.idText);
         passwordText = (EditText) findViewById(R.id.pwdText);
-        signBttn = (Button) findViewById(R.id.loginBttn);
+        signBttn = (Button) findViewById(R.id.loginBtn);
         signBttn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,7 +135,6 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
 
-
                     return JsonResponse;
 
                 }
@@ -148,7 +149,6 @@ public class LoginActivity extends AppCompatActivity {
                         String user = "user";
                         System.out.println(errorCode);
                         if (errorCode == 0) {
-
                             if (mode.equals(user)) {
                                 Toast.makeText(getApplicationContext(), "Welcome User", Toast.LENGTH_LONG).show();
                                 Intent i = new Intent(getApplicationContext(), MainActivity.class);
@@ -167,7 +167,6 @@ public class LoginActivity extends AppCompatActivity {
                         } else {
                             Toast.makeText(getApplicationContext(), "Invalid Username/ password, please try again", Toast.LENGTH_LONG).show();
                         }
-
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -206,15 +205,14 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.loginBttn:
+            case R.id.loginBtn:
                 viewMain();
                 break;
 
-            case R.id.regbttn:
+            case R.id.regBtn:
                 registerView();
                 break;
-
-            case R.id.skipText:
+            case R.id.skipBtn:
                 viewMain();
                 break;
         }

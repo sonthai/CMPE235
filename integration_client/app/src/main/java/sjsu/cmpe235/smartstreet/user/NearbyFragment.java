@@ -11,15 +11,18 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -29,6 +32,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.net.URLEncoder;
+import java.nio.BufferUnderflowException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -69,9 +73,33 @@ public class NearbyFragment extends Fragment implements NearByInterface {
             }
         });
 
+        Button searchLocationBtn = (Button) v.findViewById(R.id.searchLocationBtn);
+        searchLocationBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (currLocation == null) {
+                    showDirection();
+                } else {
+                    searchLocation();
+                }
+            }
+        });
+
 
         // Get GPS Location Service LocationManager object
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+
+        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            Toast.makeText(getActivity(), "GPS is enabled in your device", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getActivity(), "GPS is not enabled in your device", Toast.LENGTH_SHORT).show();
+        }
+
+        if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+            Toast.makeText(getActivity(), "Network is available", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getActivity(), "GPS is not available", Toast.LENGTH_SHORT).show();
+        }
 
         locationLister = new MyLocationListener();
 
@@ -87,6 +115,16 @@ public class NearbyFragment extends Fragment implements NearByInterface {
             return v;
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationLister);
+        Location l = null;
+        if (locationManager != null) {
+            l = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (l != null) {
+                Log.i("Long ", String.valueOf(l.getLongitude()));
+                Log.i("Lat ", String.valueOf(l.getLatitude()));
+            } else {
+                Log.e("Location error", "Failed to detect current location");
+            }
+        }
 
         map = ((MapFragment) getActivity().getFragmentManager().findFragmentById(R.id.map)).getMap();
 
@@ -103,8 +141,8 @@ public class NearbyFragment extends Fragment implements NearByInterface {
         return v;
     }
 
-    public void searchLocation(View v) {
-        EditText locationText = (EditText) v.findViewById(R.id.location_search_box);
+    public void searchLocation() {
+        EditText locationText = (EditText) getActivity().findViewById(R.id.location_search_box);
         if (locationText.getText().toString().trim().length() != 0) {
             String url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
             url += "location=" + currLocation.getLatitude() + "," + currLocation.getLongitude();
@@ -114,9 +152,9 @@ public class NearbyFragment extends Fragment implements NearByInterface {
         }
     }
 
-    public void showDirection(View v) {
-        EditText from = (EditText) v.findViewById(R.id.location_search_box);
-        EditText to = (EditText) v.findViewById(R.id.to_place);
+    public void showDirection() {
+        EditText from = (EditText) getActivity().findViewById(R.id.location_search_box);
+        EditText to = (EditText) getActivity().findViewById(R.id.to_place);
         String origin = null;
         String destination = null;
 
@@ -227,8 +265,10 @@ public class NearbyFragment extends Fragment implements NearByInterface {
                     return;
                 }
 
-                locationManager.removeUpdates(locationLister);
-                locationManager = null;
+                //locationManager.removeUpdates(locationLister);
+                //locationManager = null;
+            } else {
+                Toast.makeText(getActivity(), "Location is null", Toast.LENGTH_SHORT).show();
             }
         }
 

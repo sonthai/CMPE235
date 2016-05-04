@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,26 +7,48 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="sjsu.cmpe235.smartstreet.user.Login"
-    tools:showIn="@layout/activity_login"
-    android:background="#154c6e">
+    tools:context="sjsu.cmpe235.smartstreet.user.LoginActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/app_name"
+        android:id="@+id/appName"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/username"
+        android:id="@+id/textView6"
+        android:layout_below="@+id/appName"
+        android:layout_toLeftOf="@+id/appName"
+        android:layout_toStartOf="@+id/appName"
+        android:layout_marginTop="41dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/password"
+        android:id="@+id/textView7"
+        android:layout_below="@+id/textView6"
+        android:layout_toLeftOf="@+id/appName"
+        android:layout_toStartOf="@+id/appName"
+        android:layout_marginTop="52dp" />
+
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
         android:id="@+id/idText"
-        android:hint="Enter Email Address "
-        android:focusable="true"
-        android:textColorHighlight="#ff7eff15"
-        android:textColorHint="#ffffff"
-        android:layout_below="@+id/textView2"
-        android:layout_marginTop="45dp"
-        android:textColor="#ffffff"
-        android:layout_alignRight="@+id/pwdText"
-        android:layout_alignEnd="@+id/pwdText"
-        android:layout_alignLeft="@+id/pwdText"
-        android:layout_alignStart="@+id/pwdText" />
-
+        android:layout_above="@+id/textView7"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -35,64 +56,37 @@
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/pwdText"
-        android:textColorHint="#ffffff"
-        android:hint="Password"
-        android:textColor="#ffffff"
-        android:layout_below="@+id/idText"
-        android:layout_alignRight="@+id/textView2"
-        android:layout_alignEnd="@+id/textView2" />
+        android:layout_alignBottom="@+id/textView7"
+        android:layout_alignLeft="@+id/idText"
+        android:layout_alignStart="@+id/idText" />
 
     <Button
+        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign in"
-        android:id="@+id/loginBttn"
-        android:onClick="onClick"
-        android:background="#47b12c"
-        android:textColor="#ffffff"
+        android:text="@string/loginBtn"
+        android:id="@+id/loginBtn"
         android:layout_centerVertical="true"
-        android:layout_alignRight="@+id/textView2"
-        android:layout_alignEnd="@+id/textView2"
-        android:layout_alignLeft="@+id/pwdText"
-        android:layout_alignStart="@+id/pwdText" />
+        android:layout_toLeftOf="@+id/pwdText"
+        android:layout_toStartOf="@+id/pwdText" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/registerBtn"
+        android:id="@+id/regBtn"
+        android:layout_alignTop="@+id/loginBtn"
+        android:layout_toRightOf="@+id/skipBtn"
+        android:layout_toEndOf="@+id/skipBtn" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Register"
-        android:onClick="onClick"
-        android:id="@+id/regbttn"
-        android:layout_marginTop="34dp"
-        android:background="#a51616"
-        android:textColor="#ffffff"
-        android:layout_below="@+id/loginBttn"
-        android:layout_alignRight="@+id/loginBttn"
-        android:layout_alignEnd="@+id/loginBttn"
-        android:layout_alignLeft="@+id/loginBttn"
-        android:layout_alignStart="@+id/loginBttn" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Smart Street"
-        android:id="@+id/textView2"
-        android:layout_marginTop="32dp"
-        android:textColor="#ebe8e8"
-        android:focusable="true"
-        android:textSize="35dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/skipText"
-        android:text="Skip login and continue"
-        android:linksClickable="true"
-        android:onClick="onClick"
-        android:textColor="#ffffff"
-        android:layout_below="@+id/regbttn"
+        android:text="@string/skipBtn"
+        android:id="@+id/skipBtn"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="58dp" />
+        android:layout_marginBottom="67dp" />
+
 </RelativeLayout>
