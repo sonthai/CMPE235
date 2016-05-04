@@ -1,13 +1,18 @@
 package sjsu.cmpe235.smartstreet.admin;
 
 
+import android.app.Dialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,6 +33,7 @@ import java.util.Date;
 import java.util.List;
 
 import sjsu.cmpe235.smartstreet.admin.models.Sensor;
+import sjsu.cmpe235.smartstreet.admin.services.AdminServices;
 import sjsu.cmpe235.smartstreet.admin.utils.CustomSensorAdapter;
 import sjsu.cmpe235.smartstreet.admin.Constants.Constants;
 
@@ -41,6 +47,7 @@ public class SensorMaintenanceFragment extends Fragment {
     ListView sensorListView;
     CustomSensorAdapter adapter;
     ArrayList<Sensor> sensors;
+    AdminServices adminServices = new AdminServices();
 
     public SensorMaintenanceFragment() {
         // Required empty public constructor
@@ -55,8 +62,70 @@ public class SensorMaintenanceFragment extends Fragment {
         sensorListView = (ListView) v.findViewById(R.id.sensorListView);
         new SensorAsync().execute(Constants.url + "/sensors/list");
 
+        sensorListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Sensor sensor = (Sensor)  parent.getItemAtPosition(position);
+                openSensorDialog(sensor);
+
+
+            }
+        });
+
         return v;
     }
+
+    private void openSensorDialog(final Sensor s) {
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.sensor_diaglog);
+        dialog.setTitle("Sensor Status Update");
+        TextView sId = (TextView) dialog.findViewById(R.id.sensor_id);
+        TextView sLocation = (TextView) dialog.findViewById(R.id.sensor_location);
+        final EditText sStatus = (EditText) dialog.findViewById(R.id.sensor_status);
+        Button sDelete = (Button) dialog.findViewById(R.id.deleteSensor);
+        Button sApply = (Button) dialog.findViewById(R.id.applyChange);
+        Button sCancel = (Button) dialog.findViewById(R.id.cancelChange);
+        sId.setText(s.getSensorId());
+        sLocation.setText(s.getLocation());
+        sStatus.setText(s.getStatus());
+
+        sCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        sDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = Constants.url + "/sensors/delete/" + s.getSensorId();
+                adminServices.delete(url);
+                dialog.dismiss();
+            }
+        });
+
+        sApply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!s.getStatus().equalsIgnoreCase(sStatus.getText().toString())) {
+                    try {
+                        String url = Constants.url + "/sensors/update/" + s.getSensorId();
+                        JSONObject jsonObject = new JSONObject();
+                        jsonObject.put("sensor_status", sStatus.getText().toString());
+                        adminServices.update(url, String.valueOf(jsonObject));
+                        dialog.dismiss();
+                    }catch (JSONException jEx) {
+                        jEx.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        dialog.show();
+
+    }
+
 
     private class SensorAsync extends AsyncTask<String, Void, Void> {
 

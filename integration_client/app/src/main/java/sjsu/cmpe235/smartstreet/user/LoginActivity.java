@@ -177,19 +177,20 @@ public class LoginActivity extends AppCompatActivity {
                 System.out.println(errorCode);
                 if (errorCode == 0) {
                     if (mode.equals(user)) {
-                        Toast.makeText(getApplicationContext(), "Welcome User", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getApplicationContext(), "Welcome User", Toast.LENGTH_LONG).show();
                         Intent i = new Intent(getApplicationContext(), MainActivity.class);
                         i.putExtra(USERNAME, usernameText.getText().toString());
                         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(i);
                         finish();
-                    }// else {
+                    } else {
                        // Toast.makeText(getApplicationContext(), "Welcome User", Toast.LENGTH_LONG).show();
                         Intent i = new Intent(getApplicationContext(), AdminActivity.class);
+                        i.putExtra(USERNAME, usernameText.getText().toString());
                         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(i);
                         finish();
-                   // }
+                    }
                 } else {
                     Toast.makeText(getApplicationContext(), "Invalid Username/ password, please try again", Toast.LENGTH_LONG).show();
                 }

@@ -1,13 +1,18 @@
 package sjsu.cmpe235.smartstreet.admin;
 
 
+import android.app.Dialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,7 +28,9 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import sjsu.cmpe235.smartstreet.admin.models.Sensor;
 import sjsu.cmpe235.smartstreet.admin.models.Tree;
+import sjsu.cmpe235.smartstreet.admin.services.AdminServices;
 import sjsu.cmpe235.smartstreet.admin.utils.CustomTreeAdapter;
 import sjsu.cmpe235.smartstreet.admin.Constants.Constants;
 import sjsu.cmpe235.smartstreet.user.R;
@@ -36,6 +43,7 @@ public class TreeMaintenanceFragment extends Fragment {
     ListView treeListView;
     CustomTreeAdapter adapter;
     ArrayList<Tree> trees;
+    AdminServices adminServices = new AdminServices();
 
     public TreeMaintenanceFragment() {
         // Required empty public constructor
@@ -49,7 +57,68 @@ public class TreeMaintenanceFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_treemaint, container, false);
         treeListView = (ListView) v.findViewById(R.id.treeListView);
         new TreeAsync().execute(Constants.url + "/trees/list");
+
+        treeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Tree tree = (Tree)  parent.getItemAtPosition(position);
+                openTreeDialog(tree);
+
+
+            }
+        });
         return  v;
+    }
+
+    private void openTreeDialog(final Tree s) {
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.tree_diaglog);
+        dialog.setTitle("Sensor Status Update");
+        TextView tId = (TextView) dialog.findViewById(R.id.tree_id);
+        TextView tLocation = (TextView) dialog.findViewById(R.id.tree_location);
+        final EditText sStatus = (EditText) dialog.findViewById(R.id.sensor_id);
+        Button tDelete = (Button) dialog.findViewById(R.id.deleteTree);
+        Button tApply = (Button) dialog.findViewById(R.id.applyChange);
+        Button tCancel = (Button) dialog.findViewById(R.id.cancelChange);
+        tId.setText(s.getTreeId());
+        tLocation.setText(s.getLocation());
+        sStatus.setText(s.getTreeId());
+
+        tCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        tDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = Constants.url + "/trees/delete/" + s.getTreeId();
+                adminServices.delete(url);
+                dialog.dismiss();
+            }
+        });
+
+        tApply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!s.getStatus().equalsIgnoreCase(sStatus.getText().toString())) {
+                    try {
+                        String url = Constants.url + "/trees/update/" + s.getTreeId();
+                        JSONObject jsonObject = new JSONObject();
+                        jsonObject.put("sensor_id", sStatus.getText().toString());
+                        adminServices.update(url, String.valueOf(jsonObject));
+                        dialog.dismiss();
+                    }catch (JSONException jEx) {
+                        jEx.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        dialog.show();
+
     }
 
     private class TreeAsync extends AsyncTask<String, Void, Void> {
