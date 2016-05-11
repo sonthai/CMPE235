@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="400dp"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sensor Status Update"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:background="#235edf"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:textColor="#ffffff" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ID: "
+        android:id="@+id/textView3"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="60dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sensor_id"
+        android:text="sensorId"
+        android:layout_alignTop="@+id/textView3"
+        android:layout_alignStart="@+id/deleteSensor" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Location: "
+        android:layout_alignTop="@+id/sensor_location"
+        android:layout_marginStart="20dp"
+        android:layout_alignParentStart="true"
+        android:id="@+id/textView5" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sensor_location"
+        android:text="location"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/sensor_id"
+        android:layout_alignStart="@+id/sensor_id" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Status: "
+        android:layout_below="@+id/textView5"
+        android:layout_marginStart="20dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="30dp"
+        android:id="@+id/textView21" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sensor_status"
+        android:layout_marginTop="30dp"
+        android:text="status"
+        android:layout_alignBottom="@+id/textView21"
+        android:layout_alignStart="@+id/sensor_location">
+    </EditText>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/deleteBtn"
+        android:id="@+id/deleteSensor"
+        android:layout_marginStart="30dp"
+        android:layout_alignTop="@+id/applyChange"
+        android:layout_toEndOf="@+id/applyChange"
+        android:background="#ed5858" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/applyBtn"
+        android:id="@+id/applyChange"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_below="@+id/sensor_status"
+        android:layout_alignParentStart="true"
+        android:background="#2bf349" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cancelBtn"
+        android:id="@+id/cancelChange"
+        android:layout_alignTop="@+id/deleteSensor"
+        android:layout_toEndOf="@+id/deleteSensor"
+        android:layout_marginStart="30dp"
+        android:background="#52e5d4" />
+
+</RelativeLayout>
