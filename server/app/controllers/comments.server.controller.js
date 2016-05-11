@@ -11,7 +11,6 @@ var mongoose = require('mongoose'),
  */
 exports.add_comment = function(req, res) {
 	var comment = new Comment(req.body);
-	comment.date = new Date();
 	comment.save(function(err) {
 		if (err) {
 			res.status(400).send({errorCode: 1, message: 'Failed to add comment.'});
@@ -30,7 +29,7 @@ exports.list_comments = function(req, res) {
 		if (err) {	
 			res.status(400).send({errorCode: 1, message: 'Failed to fetch data from database.'});
 		} else {
-			res.status(200).send({errorCode: 0, message: JSON.stringify(result)});
+			res.status(200).send({errorCode: 0, message: result});
 		}
 	});
 };

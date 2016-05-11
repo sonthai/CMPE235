@@ -13,7 +13,7 @@ exports.add = function(req, res) {
 			res.status(400).send({errorCode: 1, message: 'Failed to query tree data.'});
 		} else {
 			if (result) {
-				res.status(400).send({errorCode: 1, message: 'Tree data already exists.'});
+				res.status(200).send({errorCode: 1, message: 'Tree data already exists.'});
 			} else {
 				var tree = new Tree(req.body);
 				tree.deployment_date = new Date();
@@ -41,7 +41,7 @@ exports.show = function(req, res) {
 			res.status(400).send({errorCode: 1, message: 'Failed to query tree data.'});
 		} else {
 			if (!doc) {
-				res.status(400).send({errorCode: 1, message: 'No tree information available.'});
+				res.status(200).send({errorCode: 1, message: 'No tree information available.'});
 			} else {
 				res.status(200).send({errorCode: 0, message: doc});
 			}	

@@ -15,12 +15,13 @@ exports.login = function(req, res) {
 			res.status(400).send({errorCode: 1, message: 'Failed to query user.'});
 		} else {
 			if (!doc) {
-				res.status(400).send({errorCode: 1, message: 'User does not exist.'});
+				res.status(200).send({errorCode: 1, message: 'User does not exist.'});
+				console.log('Inside here');
 			} else {
 				if (isValidPassword(req.body.password, doc.password)) {
 					res.status(200).send({errorCode: 0, message: 'Logged in successfully.', mode: doc.role});
 				} else {
-					res.status(400).send({errorCode: 1, message: 'Failed to login into account.'});
+					res.status(200).send({errorCode: 1, message: 'Failed to login into account.'});
 				}
 			}
 		}
@@ -39,7 +40,7 @@ exports.register =  function(req, res) {
 			res.status(400).send({errorCode: 1, message: 'Failed to query user.'});
 		} else {
 			if (doc) {
-				res.status(400).send({errorCode: 1, message: 'User already exists.'});
+				res.status(200).send({errorCode: 1, message: 'User already exists.'});
 			} else {
 				user.save(function(err) {
 					if (err) {
